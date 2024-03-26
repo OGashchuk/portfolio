@@ -1,0 +1,991 @@
+<html lang="ru">
+
+<head>
+
+    <script src="shared/jquery.min.js"></script>
+    <script>
+        function set_validator_errors(){
+        orderValidator.errorTitle = 'Пожалуйста, исправьте следующие ошибки'; 
+
+        orderValidator.errorNameField = 'Имя'; 
+        orderValidator.errorNameMess = 'Укажите своё имя'; 
+        
+        orderValidator.errorPhoneField = 'Телефон для связи'; 
+        orderValidator.errorPhoneMess = 'Введите правильный телефон'; 
+        
+        orderValidator.errorAddress = 'Введите правильный адрес'; 
+        orderValidator.errorRequired = 'обязательное поле'; 
+        orderValidator.errorMaxLength = 'допустимо максимум {1} символа'; 
+        orderValidator.errorMinLength = 'допустимо минимум {1} символа'; 
+        orderValidator.errorEmailField = 'E-mail';
+        orderValidator.errorEmail = 'указан не корректный email';
+        }
+    </script>
+    <script>
+        window.app = {
+    timestamp: parseInt((new Date()).getTime() / 1000),
+    jq: jQuery,
+    formAction: window.location.href,
+    leadToken: '6273c778d579f5.22210005',
+    offers: {"12000":{"id":12000,"country":{"code":"RU","name":"\u0420\u043e\u0441\u0441\u0438\u044f"},"price":"150","price2":"","currency":{"code":"RUB","name":"\u0440\u0443\u0431"},"discount":"","delivery_price":"","link":"","product_sku":"","prepaid_info_html":""},"5569":{"id":5569,"country":{"code":"UA","name":"\u0423\u043a\u0440\u0430\u0438\u043d\u0430"},"price":"990","price2":"1980","currency":{"code":"UAH","name":"\u0433\u0440\u043d"},"discount":"","delivery_price":"","link":"","product_sku":"","prepaid_info_html":""}},
+    currentOffer: {"id":5569,"country":{"code":"UA","name":"\u0423\u043a\u0440\u0430\u0438\u043d\u0430"},"price":"990","price2":"1980","currency":{"code":"UAH","name":"\u0433\u0440\u043d"},"discount":"","delivery_price":"","link":"","product_sku":"","prepaid_info_html":""},
+    allowedCountries: ["RU","UA"],
+    _setOfferId: false,
+    streamHid: '',
+    showcaseUrl: '',
+    
+    setOffer: function (offerId) {
+        if (offerId == this._setOfferId) {
+            return ;
+        }
+        this._setOfferId = offerId;
+        if (offerId) {
+            var offer = app.offers[offerId];
+            var previousOffer = app.currentOffer;
+            app.currentOffer = offer;
+            var event = this.jq.Event("offerchange");
+            event.previousOffer = previousOffer;
+            event.currentOffer = app.currentOffer;
+            this.jq(document).trigger(event);
+            this.updatePage(offer);
+        } else {
+            $('input[name=country]').val('');
+        }
+    },
+    
+    updatePage: function(offer) {
+        $('x-newprice').html(offer.price);
+        $('x-oldprice').html(offer.price2);
+        $('x-currency').html(offer.currency.name);
+        $('input[name=offer], select[name=offer]').val(offer.id);
+        $('input[name=country]').val(offer.country.code);
+    },
+
+    blockForm: function() {
+        // Блокируем кнопки при отправке формы
+        $('input[type=submit]', $(this)).prop( 'disabled', true ).attr( 'disabled', true );
+        $('button', $(this)).prop( 'disabled', true ).attr( 'disabled', true );
+        app.incompleteOrder.lock = true;
+        clearTimeout(app.incompleteOrder.timer);
+    },
+
+    unblockForm: function() {
+        $('input[type=submit]', $(this)).prop( 'disabled', false ).attr( 'disabled', false );
+        $('button[type=submit]', $(this)).prop( 'disabled', false ).attr( 'disabled', false );
+        app.incompleteOrder.lock = false;
+        clearTimeout(app.incompleteOrder.timer);
+    }
+
+};
+
+
+</script>
+    <script src="shared/form.validate.js?12"></script>
+    <script src="shared/interPhoneCodes.js"></script>
+    <script src="shared/showcase.js?v=1"></script>
+    <script src="shared/form.incomplete.js?10"></script>
+    <script src="shared/main2.js?17"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Фототюли от производителя Франция!</title>
+    <meta property="og:title" content="Фототюли от производителя Франция!">
+    <meta property="og:description" content="Премиальные Фототюли «Sonate» завоевали популярность европейских женщин!">
+    <link rel="icon" href="./favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
+    <link href="./fonts/stylesheet.css" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet">
+    <script src="./js/jquery-1.11.3.min.js"></script>
+    <script src="./js/myscript.js"></script>
+    <script src="./js/jquery.cookie.js"></script>
+    <script type="text/javascript">
+    $jsonData = {
+        "RU": {
+            "currency": " \u0440\u0443\u0431.",
+            "productsum": 690,
+            "oldproductsum": 5299,
+            "delivery": 0,
+            "totalsum": "690.00"
+        }
+    }
+    </script>
+    <style>
+        .ajax_loader {
+            display: none
+        }
+
+        .ajax_loader_block {
+            text-align: center
+        }
+
+        .ajax_loader_block img {
+            margin: 0 auto;
+            width: fit-content
+        }
+
+        .ajax_loader_block span {
+            color: inherit
+        }
+
+        select,
+        button,
+        img,
+        input,
+        video {
+            outline: none
+        }
+
+        select,
+        button {
+            cursor: pointer
+        }
+
+        .reolader {
+            text-align: center
+        }
+    </style>
+    <!-- LT code insertion -->
+    <!-- /LT code insertion -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-1000000-0001"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-1000000-0001');
+</script>
+    <script src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/957109221/?random=1651754873298&amp;cv=9&amp;fst=1651754873298&amp;num=1&amp;bg=ffffff&amp;guid=ON&amp;resp=GooglemKTybQhCsO&amp;u_h=1080&amp;u_w=1920&amp;u_ah=1032&amp;u_aw=1920&amp;u_cd=24&amp;u_his=3&amp;u_tz=180&amp;u_java=false&amp;u_nplug=5&amp;u_nmime=2&amp;gtm=2oa540&amp;sendb=1&amp;ig=1&amp;data=event%3Dgtag.config&amp;frm=0&amp;url=http%3A%2F%2Fphoto.xgoodsitem.com%2Fr3%2F%3Foff%3D6DK8TyD%26lnk%3D1997&amp;tiba=%D0%A4%D0%BE%D1%82%D0%BE%D1%82%D1%8E%D0%BB%D0%B8%20%D0%BE%D1%82%20%D0%BF%D1%80%D0%BE%D0%B8%D0%B7%D0%B2%D0%BE%D0%B4%D0%B8%D1%82%D0%B5%D0%BB%D1%8F%20%D0%A4%D1%80%D0%B0%D0%BD%D1%86%D0%B8%D1%8F!&amp;hn=www.googleadservices.com&amp;async=1&amp;rfmt=3&amp;fmt=4"></script>
+</head>
+
+<body>
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=AW-957109221"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-957109221');
+</script>
+    <section class="section_2">
+        <div class="block">
+            <div class="block_in">
+                <div class="block1 float100">
+                    <div class="logoblock">
+                        <p>
+                            <a><img src="./images/logo.png"></a>
+                        </p>
+                    </div>
+                    <div class="sloganblock">
+                        <p>Оригинальные Фототюли от
+                            <br> французского производителя!</p>
+                    </div>
+                    <div class="navblock">
+                        <ul>
+                            <li><a class="olia1" href="#">О продукции</a></li>
+                            <li><a class="olia2" href="#">Отзывы</a></li>
+                            <li><a class="olia3" href="#">Преимущества</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="block">
+            <div class="block_in">
+                <p class="b2text1">Суперакция!</p>
+                <p class="vlist1">Распродажа коллекции!
+                    <br> Европейская новинка!</p>
+                <p class="vlist2">Закажите «Sonate»
+                    <br> с максимальной скидкой
+                    <br> прямо сейчас!</p>
+                <div class="priceBlock">
+                    <p class="oldprice"><strike>Цена: <price class="oldproductsum">
+                                <x-oldprice>1980</x-oldprice>
+                                <x-currency>грн</x-currency>
+                            </price></strike></p>
+                    <p class="price"><span class="pricetodaytext">Цена сегодня: </span><span class="pricetoday productsum">
+                            <x-newprice>990</x-newprice>
+                            <x-currency>грн</x-currency>
+                        </span></p>
+                </div>
+                <span style="font-size: 12px; opacity: 0.8; color: #222; display: block;margin: 10px 0;">* цена за 1 метр погонный</span>
+                <p class="speshusuka">Акция 2+1</p>
+                <p class="akckor">Осталось<span>4</span> штук!</p>
+                <span class="strell"></span>
+            </div>
+        </div>
+    </section>
+    <section class="section_3">
+        <div class="block">
+            <div class="block_in">
+                <div class="h1">
+                    <p>каталог продукции</p>
+                </div>
+                <div class="h1_pod">
+                    <p>Выберите Фототюли:</p>
+                </div>
+                <div class="tovarlist">
+                    <div class="tovar_item item21">
+                        <div class="tovar_item_in">
+                            <p class="tovarimg">
+                                <img id_product="21" src="./images/21.jpg">
+                            </p>
+                            <p class="nametovar">Фототюль Conserdo</p>
+                            <p class="pricetovar"><span class="oldprlist"><strike class="oldproductsum">
+                                        <x-oldprice>1980</x-oldprice>
+                                        <x-currency>грн</x-currency>
+                                    </strike></span><span class="prlist pricenum productsum">
+                                    <x-newprice>990</x-newprice>
+                                    <x-currency>грн</x-currency>
+                                </span> </p>
+                            <a class="bzak" id_product="21" href="#">Заказать</a>
+                            <p class="dnone bigimg"><img src="./images/21.jpg"></p>
+                            <p class="dnone desc">(простынь, пододеяльник, 2 наволочки)</p>
+                        </div>
+                    </div>
+                    <div class="tovar_item item22">
+                        <div class="tovar_item_in">
+                            <p class="tovarimg">
+                                <img id_product="22" src="./images/22.jpg">
+                            </p>
+                            <p class="nametovar">Фототюль Neapo</p>
+                            <p class="pricetovar"><span class="oldprlist"><strike class="oldproductsum">
+                                        <x-oldprice>1980</x-oldprice>
+                                        <x-currency>грн</x-currency>
+                                    </strike></span><span class="prlist pricenum productsum">
+                                    <x-newprice>990</x-newprice>
+                                    <x-currency>грн</x-currency>
+                                </span> </p>
+                            <a class="bzak" id_product="22" href="#">Заказать</a>
+                            <p class="dnone bigimg"><img src="./images/22.jpg"></p>
+                            <p class="dnone desc">(простынь, пододеяльник, 2 наволочки)</p>
+                        </div>
+                    </div>
+                    <div class="tovar_item item23">
+                        <div class="tovar_item_in">
+                            <p class="tovarimg">
+                                <img id_product="23" src="./images/23.jpg">
+                            </p>
+                            <p class="nametovar">Фототюль Forganzo</p>
+                            <p class="pricetovar"><span class="oldprlist"><strike class="oldproductsum">
+                                        <x-oldprice>1980</x-oldprice>
+                                        <x-currency>грн</x-currency>
+                                    </strike></span><span class="prlist pricenum productsum">
+                                    <x-newprice>990</x-newprice>
+                                    <x-currency>грн</x-currency>
+                                </span> </p>
+                            <a class="bzak" id_product="23" href="#">Заказать</a>
+                            <p class="dnone bigimg"><img src="./images/23.jpg"></p>
+                            <p class="dnone desc">(простынь, пододеяльник, 2 наволочки)</p>
+                        </div>
+                    </div>
+                    <div class="tovar_item item24">
+                        <div class="tovar_item_in">
+                            <p class="tovarimg">
+                                <img id_product="24" src="./images/24.jpg">
+                            </p>
+                            <p class="nametovar">Фототюль Iona</p>
+                            <p class="pricetovar"><span class="oldprlist"><strike class="oldproductsum">
+                                        <x-oldprice>1980</x-oldprice>
+                                        <x-currency>грн</x-currency>
+                                    </strike></span><span class="prlist pricenum productsum">
+                                    <x-newprice>990</x-newprice>
+                                    <x-currency>грн</x-currency>
+                                </span> </p>
+                            <a class="bzak" id_product="24" href="#">Заказать</a>
+                            <p class="dnone bigimg"><img src="./images/24.jpg"></p>
+                            <p class="dnone desc">(простынь, пододеяльник, 2 наволочки)</p>
+                        </div>
+                    </div>
+                    <div class="tovar_item item25">
+                        <div class="tovar_item_in">
+                            <p class="tovarimg">
+                                <img id_product="25" src="./images/25.jpg">
+                            </p>
+                            <p class="nametovar">Фототюль Kastillo</p>
+                            <p class="pricetovar"><span class="oldprlist"><strike class="oldproductsum">
+                                        <x-oldprice>1980</x-oldprice>
+                                        <x-currency>грн</x-currency>
+                                    </strike></span><span class="prlist pricenum productsum">
+                                    <x-newprice>990</x-newprice>
+                                    <x-currency>грн</x-currency>
+                                </span> </p>
+                            <a class="bzak" id_product="25" href="#">Заказать</a>
+                            <p class="dnone bigimg"><img src="./images/25.jpg"></p>
+                            <p class="dnone desc">(простынь, пододеяльник, 2 наволочки)</p>
+                        </div>
+                    </div>
+                    <div class="tovar_item item26">
+                        <div class="tovar_item_in">
+                            <p class="tovarimg">
+                                <img id_product="26" src="./images/26.jpg">
+                            </p>
+                            <p class="nametovar">Фототюль Vervento</p>
+                            <p class="pricetovar"><span class="oldprlist"><strike class="oldproductsum">
+                                        <x-oldprice>1980</x-oldprice>
+                                        <x-currency>грн</x-currency>
+                                    </strike></span><span class="prlist pricenum productsum">
+                                    <x-newprice>990</x-newprice>
+                                    <x-currency>грн</x-currency>
+                                </span> </p>
+                            <a class="bzak" id_product="26" href="#">Заказать</a>
+                            <p class="dnone bigimg"><img src="./images/26.jpg"></p>
+                            <p class="dnone desc">(простынь, пододеяльник, 2 наволочки)</p>
+                        </div>
+                    </div>
+                    <div class="tovar_item item27">
+                        <div class="tovar_item_in">
+                            <p class="tovarimg">
+                                <img id_product="27" src="./images/27.jpg">
+                            </p>
+                            <p class="nametovar">Фототюль Landario</p>
+                            <p class="pricetovar"><span class="oldprlist"><strike class="oldproductsum">
+                                        <x-oldprice>1980</x-oldprice>
+                                        <x-currency>грн</x-currency>
+                                    </strike></span><span class="prlist pricenum productsum">
+                                    <x-newprice>990</x-newprice>
+                                    <x-currency>грн</x-currency>
+                                </span> </p>
+                            <a class="bzak" id_product="27" href="#">Заказать</a>
+                            <p class="dnone bigimg"><img src="./images/27.jpg"></p>
+                            <p class="dnone desc">(простынь, пододеяльник, 2 наволочки)</p>
+                        </div>
+                    </div>
+                    <div class="tovar_item item28">
+                        <div class="tovar_item_in">
+                            <p class="tovarimg">
+                                <img id_product="28" src="./images/28.jpg">
+                            </p>
+                            <p class="nametovar">Фототюль Shamile</p>
+                            <p class="pricetovar"><span class="oldprlist"><strike class="oldproductsum">
+                                        <x-oldprice>1980</x-oldprice>
+                                        <x-currency>грн</x-currency>
+                                    </strike></span><span class="prlist pricenum productsum">
+                                    <x-newprice>990</x-newprice>
+                                    <x-currency>грн</x-currency>
+                                </span> </p>
+                            <a class="bzak" id_product="28" href="#">Заказать</a>
+                            <p class="dnone bigimg"><img src="./images/28.jpg"></p>
+                            <p class="dnone desc">(простынь, пододеяльник, 2 наволочки)</p>
+                        </div>
+                    </div>
+                    <div class="tovar_item item29">
+                        <div class="tovar_item_in">
+                            <p class="tovarimg">
+                                <img id_product="29" src="./images/29.jpg">
+                            </p>
+                            <p class="nametovar">Фототюль Zonza</p>
+                            <p class="pricetovar"><span class="oldprlist"><strike class="oldproductsum">
+                                        <x-oldprice>1980</x-oldprice>
+                                        <x-currency>грн</x-currency>
+                                    </strike></span><span class="prlist pricenum productsum">
+                                    <x-newprice>990</x-newprice>
+                                    <x-currency>грн</x-currency>
+                                </span> </p>
+                            <a class="bzak" id_product="29" href="#">Заказать</a>
+                            <p class="dnone bigimg"><img src="./images/29.jpg"></p>
+                            <p class="dnone desc">(простынь, пододеяльник, 2 наволочки)</p>
+                        </div>
+                    </div>
+                    <div class="tovar_item item30">
+                        <div class="tovar_item_in">
+                            <p class="tovarimg">
+                                <img id_product="30" src="./images/30.jpg">
+                            </p>
+                            <p class="nametovar">Фототюль LeStat</p>
+                            <p class="pricetovar"><span class="oldprlist"><strike class="oldproductsum">
+                                        <x-oldprice>1980</x-oldprice>
+                                        <x-currency>грн</x-currency>
+                                    </strike></span><span class="prlist pricenum productsum">
+                                    <x-newprice>990</x-newprice>
+                                    <x-currency>грн</x-currency>
+                                </span> </p>
+                            <a class="bzak" id_product="30" href="#">Заказать</a>
+                            <p class="dnone bigimg"><img src="./images/30.jpg"></p>
+                            <p class="dnone desc">(простынь, пододеяльник, 2 наволочки)</p>
+                        </div>
+                    </div>
+                    <div class="tovar_item item31">
+                        <div class="tovar_item_in">
+                            <p class="tovarimg">
+                                <img id_product="31" src="./images/31.jpg">
+                            </p>
+                            <p class="nametovar">Фототюль Alpina</p>
+                            <p class="pricetovar"><span class="oldprlist"><strike class="oldproductsum">
+                                        <x-oldprice>1980</x-oldprice>
+                                        <x-currency>грн</x-currency>
+                                    </strike></span><span class="prlist pricenum productsum">
+                                    <x-newprice>990</x-newprice>
+                                    <x-currency>грн</x-currency>
+                                </span> </p>
+                            <a class="bzak" id_product="31" href="#">Заказать</a>
+                            <p class="dnone bigimg"><img src="./images/31.jpg"></p>
+                            <p class="dnone desc">(простынь, пододеяльник, 2 наволочки)</p>
+                        </div>
+                    </div>
+                    <div class="tovar_item item32">
+                        <div class="tovar_item_in">
+                            <p class="tovarimg">
+                                <img id_product="32" src="./images/32.jpg">
+                            </p>
+                            <p class="nametovar">Фототюль Yasmina</p>
+                            <p class="pricetovar"><span class="oldprlist"><strike class="oldproductsum">
+                                        <x-oldprice>1980</x-oldprice>
+                                        <x-currency>грн</x-currency>
+                                    </strike></span><span class="prlist pricenum productsum">
+                                    <x-newprice>990</x-newprice>
+                                    <x-currency>грн</x-currency>
+                                </span> </p>
+                            <a class="bzak" id_product="32" href="#">Заказать</a>
+                            <p class="dnone bigimg"><img src="./images/32.jpg"></p>
+                            <p class="dnone desc">(простынь, пододеяльник, 2 наволочки)</p>
+                        </div>
+                    </div>
+                    <div class="tovar_item item33">
+                        <div class="tovar_item_in">
+                            <p class="tovarimg">
+                                <img id_product="33" src="./images/33.jpg">
+                            </p>
+                            <p class="nametovar">Фототюль Namor</p>
+                            <p class="pricetovar"><span class="oldprlist"><strike class="oldproductsum">
+                                        <x-oldprice>1980</x-oldprice>
+                                        <x-currency>грн</x-currency>
+                                    </strike></span><span class="prlist pricenum productsum">
+                                    <x-newprice>990</x-newprice>
+                                    <x-currency>грн</x-currency>
+                                </span> </p>
+                            <a class="bzak" id_product="33" href="#">Заказать</a>
+                            <p class="dnone bigimg"><img src="./images/33.jpg"></p>
+                            <p class="dnone desc">(простынь, пододеяльник, 2 наволочки)</p>
+                        </div>
+                    </div>
+                    <div class="tovar_item item34">
+                        <div class="tovar_item_in">
+                            <p class="tovarimg">
+                                <img id_product="34" src="./images/34.jpg">
+                            </p>
+                            <p class="nametovar">Фототюль Solte</p>
+                            <p class="pricetovar"><span class="oldprlist"><strike class="oldproductsum">
+                                        <x-oldprice>1980</x-oldprice>
+                                        <x-currency>грн</x-currency>
+                                    </strike></span><span class="prlist pricenum productsum">
+                                    <x-newprice>990</x-newprice>
+                                    <x-currency>грн</x-currency>
+                                </span> </p>
+                            <a class="bzak" id_product="34" href="#">Заказать</a>
+                            <p class="dnone bigimg"><img src="./images/34.jpg"></p>
+                            <p class="dnone desc">(простынь, пододеяльник, 2 наволочки)</p>
+                        </div>
+                    </div>
+                    <div class="tovar_item item35">
+                        <div class="tovar_item_in">
+                            <p class="tovarimg">
+                                <img id_product="35" src="./images/35.jpg">
+                            </p>
+                            <p class="nametovar">Фототюль Umbra</p>
+                            <p class="pricetovar"><span class="oldprlist"><strike class="oldproductsum">
+                                        <x-oldprice>1980</x-oldprice>
+                                        <x-currency>грн</x-currency>
+                                    </strike></span><span class="prlist pricenum productsum">
+                                    <x-newprice>990</x-newprice>
+                                    <x-currency>грн</x-currency>
+                                </span> </p>
+                            <a class="bzak" id_product="35" href="#">Заказать</a>
+                            <p class="dnone bigimg"><img src="./images/35.jpg"></p>
+                            <p class="dnone desc">(простынь, пододеяльник, 2 наволочки)</p>
+                        </div>
+                    </div>
+                    <div class="tovar_item item36">
+                        <div class="tovar_item_in">
+                            <p class="tovarimg">
+                                <img id_product="36" src="./images/36.jpg">
+                            </p>
+                            <p class="nametovar">Фототюль Daddario</p>
+                            <p class="pricetovar"><span class="oldprlist"><strike class="oldproductsum">
+                                        <x-oldprice>1980</x-oldprice>
+                                        <x-currency>грн</x-currency>
+                                    </strike></span><span class="prlist pricenum productsum">
+                                    <x-newprice>990</x-newprice>
+                                    <x-currency>грн</x-currency>
+                                </span> </p>
+                            <a class="bzak" id_product="36" href="#">Заказать</a>
+                            <p class="dnone bigimg"><img src="./images/36.jpg"></p>
+                            <p class="dnone desc">(простынь, пододеяльник, 2 наволочки)</p>
+                        </div>
+                    </div>
+                    <div class="tovar_item item37">
+                        <div class="tovar_item_in">
+                            <p class="tovarimg">
+                                <img id_product="37" src="./images/37.jpg">
+                            </p>
+                            <p class="nametovar">Фототюль Geramole</p>
+                            <p class="pricetovar"><span class="oldprlist"><strike class="oldproductsum">
+                                        <x-oldprice>1980</x-oldprice>
+                                        <x-currency>грн</x-currency>
+                                    </strike></span><span class="prlist pricenum productsum">
+                                    <x-newprice>990</x-newprice>
+                                    <x-currency>грн</x-currency>
+                                </span> </p>
+                            <a class="bzak" id_product="37" href="#">Заказать</a>
+                            <p class="dnone bigimg"><img src="./images/37.jpg"></p>
+                            <p class="dnone desc">(простынь, пододеяльник, 2 наволочки)</p>
+                        </div>
+                    </div>
+                    <div class="tovar_item item38">
+                        <div class="tovar_item_in">
+                            <p class="tovarimg">
+                                <img id_product="38" src="./images/38.jpg">
+                            </p>
+                            <p class="nametovar">Фототюль Toscalla</p>
+                            <p class="pricetovar"><span class="oldprlist"><strike class="oldproductsum">
+                                        <x-oldprice>1980</x-oldprice>
+                                        <x-currency>грн</x-currency>
+                                    </strike></span><span class="prlist pricenum productsum">
+                                    <x-newprice>990</x-newprice>
+                                    <x-currency>грн</x-currency>
+                                </span> </p>
+                            <a class="bzak" id_product="38" href="#">Заказать</a>
+                            <p class="dnone bigimg"><img src="./images/38.jpg"></p>
+                            <p class="dnone desc">(простынь, пододеяльник, 2 наволочки)</p>
+                        </div>
+                    </div>
+                    <div class="tovar_item item39">
+                        <div class="tovar_item_in">
+                            <p class="tovarimg">
+                                <img id_product="39" src="./images/39.jpg">
+                            </p>
+                            <p class="nametovar">Фототюль Osvald</p>
+                            <p class="pricetovar"><span class="oldprlist"><strike class="oldproductsum">
+                                        <x-oldprice>1980</x-oldprice>
+                                        <x-currency>грн</x-currency>
+                                    </strike></span><span class="prlist pricenum productsum">
+                                    <x-newprice>990</x-newprice>
+                                    <x-currency>грн</x-currency>
+                                </span> </p>
+                            <a class="bzak" id_product="39" href="#">Заказать</a>
+                            <p class="dnone bigimg"><img src="./images/39.jpg"></p>
+                            <p class="dnone desc">(простынь, пододеяльник, 2 наволочки)</p>
+                        </div>
+                    </div>
+                    <div class="tovar_item item40">
+                        <div class="tovar_item_in">
+                            <p class="tovarimg">
+                                <img id_product="40" src="./images/40.jpg">
+                            </p>
+                            <p class="nametovar">Фототюль Harmonia</p>
+                            <p class="pricetovar"><span class="oldprlist"><strike class="oldproductsum">
+                                        <x-oldprice>1980</x-oldprice>
+                                        <x-currency>грн</x-currency>
+                                    </strike></span><span class="prlist pricenum productsum">
+                                    <x-newprice>990</x-newprice>
+                                    <x-currency>грн</x-currency>
+                                </span> </p>
+                            <a class="bzak" id_product="40" href="#">Заказать</a>
+                            <p class="dnone bigimg"><img src="./images/40.jpg"></p>
+                            <p class="dnone desc">(простынь, пододеяльник, 2 наволочки)</p>
+                        </div>
+                    </div>
+                    <div class="tovar_item item41">
+                        <div class="tovar_item_in">
+                            <p class="tovarimg">
+                                <img id_product="41" src="./images/41.jpg">
+                            </p>
+                            <p class="nametovar">Фототюль Regino</p>
+                            <p class="pricetovar"><span class="oldprlist"><strike class="oldproductsum">
+                                        <x-oldprice>1980</x-oldprice>
+                                        <x-currency>грн</x-currency>
+                                    </strike></span><span class="prlist pricenum productsum">
+                                    <x-newprice>990</x-newprice>
+                                    <x-currency>грн</x-currency>
+                                </span> </p>
+                            <a class="bzak" id_product="41" href="#">Заказать</a>
+                            <p class="dnone bigimg"><img src="./images/41.jpg"></p>
+                            <p class="dnone desc">(простынь, пододеяльник, 2 наволочки)</p>
+                        </div>
+                    </div>
+                    <div class="tovar_item item42">
+                        <div class="tovar_item_in">
+                            <p class="tovarimg">
+                                <img id_product="42" src="./images/42.jpg">
+                            </p>
+                            <p class="nametovar">Фототюль Alteza</p>
+                            <p class="pricetovar"><span class="oldprlist"><strike class="oldproductsum">
+                                        <x-oldprice>1980</x-oldprice>
+                                        <x-currency>грн</x-currency>
+                                    </strike></span><span class="prlist pricenum productsum">
+                                    <x-newprice>990</x-newprice>
+                                    <x-currency>грн</x-currency>
+                                </span> </p>
+                            <a class="bzak" id_product="42" href="#">Заказать</a>
+                            <p class="dnone bigimg"><img src="./images/42.jpg"></p>
+                            <p class="dnone desc">(простынь, пододеяльник, 2 наволочки)</p>
+                        </div>
+                    </div>
+                    <div class="tovar_item item43">
+                        <div class="tovar_item_in">
+                            <p class="tovarimg">
+                                <img id_product="43" src="./images/43.jpg">
+                            </p>
+                            <p class="nametovar">Фототюль Mirano</p>
+                            <p class="pricetovar"><span class="oldprlist"><strike class="oldproductsum">
+                                        <x-oldprice>1980</x-oldprice>
+                                        <x-currency>грн</x-currency>
+                                    </strike></span><span class="prlist pricenum productsum">
+                                    <x-newprice>990</x-newprice>
+                                    <x-currency>грн</x-currency>
+                                </span> </p>
+                            <a class="bzak" id_product="43" href="#">Заказать</a>
+                            <p class="dnone bigimg"><img src="./images/43.jpg"></p>
+                            <p class="dnone desc">(простынь, пододеяльник, 2 наволочки)</p>
+                        </div>
+                    </div>
+                    <div class="tovar_item item44">
+                        <div class="tovar_item_in">
+                            <p class="tovarimg">
+                                <img id_product="44" src="./images/44.jpg">
+                            </p>
+                            <p class="nametovar">Фототюль Ferda</p>
+                            <p class="pricetovar"><span class="oldprlist"><strike class="oldproductsum">
+                                        <x-oldprice>1980</x-oldprice>
+                                        <x-currency>грн</x-currency>
+                                    </strike></span><span class="prlist pricenum productsum">
+                                    <x-newprice>990</x-newprice>
+                                    <x-currency>грн</x-currency>
+                                </span> </p>
+                            <a class="bzak" id_product="44" href="#">Заказать</a>
+                            <p class="dnone bigimg"><img src="./images/44.jpg"></p>
+                            <p class="dnone desc">(простынь, пододеяльник, 2 наволочки)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section_4" id="section_4">
+        <div class="block">
+            <div class="block_in">
+                <div class="tuh h1">
+                    <p>Премиальные Фототюли «Sonate»
+                        <br> завоевали популярность европейских женщин!</p>
+                </div>
+                <div class="block_faktkos">
+                    <div class="fackitem">
+                        <p class="facktext01">«Sonate» преображает!</p>
+                        <img src="./images/popular1_07.png">
+                        <p class="facktext1">Элен Куртье</p>
+                        <p class="facktext2">Франция, популярный дизайнер интерьеров
+                        </p>
+                        <div class="facktext3">
+                            <p>Фототюли «Sonate» я использую уже 3 года. </p>
+                            <p>Они помогают мне сделать даже самый простой дизайн комнаты неповторимым, стильным и элегантным.</p>
+                            <p>Обычные, классические, тюли, даже в стиле рококо, такой эффект создать не могут, только «Sonate»!
+                            </p>
+                        </div>
+                    </div>
+                    <div class="fackitem">
+                        <p class="facktext01">«Sonate» украшает!</p>
+                        <img src="./images/popular2_07.png">
+                        <p class="facktext1">Жан Реггеро</p>
+                        <p class="facktext2">дизайнер-создатель фототюлей «Sonate»
+                        </p>
+                        <div class="facktext3">
+                            <p>Когда мы придумали дизайн тюлей, мы хотели добавить в жизнь людей красок, возвышенности, чтобы они, даже находясь дома, могли наслаждаться красотой. </p>
+                            <p>Нам это удалось! Сегодня вы можете выбрать «Sonate», исходя из своих вкусов и предпочтений. </p>
+                            <p>Для вас множество вариантов красоты!
+                            </p>
+                        </div>
+                    </div>
+                    <div class="fackitem">
+                        <p class="facktext01">«Sonate» дарит радость</p>
+                        <img src="./images/popular3_07.png">
+                        <p class="facktext1">Эния Кассади
+                        </p>
+                        <p class="facktext2">Австрия, домохозяйка</p>
+                        <div class="facktext3">
+                            <p>Всегда не любила обычные рядовые тюли, они мне напоминают мне старину.
+                            </p>
+                            <p>Сейчас купила себе 10 комплектов тюль плюс, это просто превосходно! Теперь, чтобы изменить внешний вид комнаты, мне всего лишь достаточно повесить новые «Sonate».
+                            </p>
+                            <p>Мой интерьер теперь выглядит гораздо лучше и не надо делать ремонт!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tuh h1">
+                    <p>Уникальные Фототюли «Sonate»
+                        <br> завоевали популярность европейских женщин!</p>
+                </div>
+                <div class="block_faktkos">
+                    <div class="milanitem">
+                        <p class="milantext01">Сен-Дени!</p>
+                        <img src="./images/milan1_06.jpg">
+                        <div class="milantext3">
+                            <p>В этой столице французской моды расположена наша фабрика.</p>
+                            <p>
+                                Оригинальные Фототюли «Sonate» изготавливаются только здесь и больше нигде!
+                            </p>
+                            <p>
+                                Контроль качества на каждом этапе производства гарантирует, что вы получите качественный долговечный товар.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="milanitem">
+                        <p class="milantext01">Лучшие дизайнеры интерьеров!
+                        </p>
+                        <img src="./images/milan2_07.jpg">
+                        <div class="milantext3">
+                            <p>«Sonate» создают дизайнеры интерьеров с мировым именем.
+                            </p>
+                            <p>
+                                Среди них такие известные мастера и законодатели моды, как Альберт Кюшо, Томас Филтинг, Сюсанна Вернье и другие.
+                            </p>
+                            <p>
+                                Под каждый интерьер найдется свой идеальный вариант «Sonate»!
+                            </p>
+                        </div>
+                    </div>
+                    <div class="milanitem">
+                        <p class="milantext01">Хватит жить с интерьером, как у «старой бабушки»!</p>
+                        <img src="./images/milan3_07.png">
+                        <div class="milantext3">
+                            <p>Неужели вам нравится смотреть на свои тюли, и понимать, что точно такие же были у вашей мамы
+                            </p>
+                            <p>
+                                и бабушки в прошлом веке? Ведь это все равно, что пользоваться старым городским
+                            </p>
+                            <p>
+                                телефоном, а не современным мобильным!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section_5" id="section_5">
+        <div class="block">
+            <div class="block_in">
+                <div class="h1">
+                    <p> «Sonate» - лучший выбор для дома!</p>
+                </div>
+                <div class="s5divlist">
+                    <div class="spitem">
+                        <p class="s5t1">Просто ухаживать!</p>
+                        <img src="./images/dom1_11.png">
+                        <p class="s5t2">Обычная стирка
+                            <br> при 30˚!</p>
+                    </div>
+                    <div class="spitem">
+                        <p class="s5t1">Отталкивает пыль!</p>
+                        <img src="./images/dom2_11.png">
+                        <p class="s5t2">Обработано
+                            <br> антистатиком!
+                        </p>
+                    </div>
+                    <div class="spitem">
+                        <p class="s5t1">Дополнительная защита
+                            <br> от ультрафиолета!</p>
+                        <img src="./images/dom3_11.png">
+                        <p class="s5t2">ЕУФ-излучение не проходит!</p>
+                    </div>
+                    <div class="spitem">
+                        <p class="s5t1">Срок службы от 10 лет!</p>
+                        <img src="./images/dom4_11.png">
+                        <p class="s5t2">Яркость цвета постоянная,
+                            <br> не блекнет!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section_7" id="section_7">
+        <div class="block">
+            <div class="block_in">
+                <div class="h1">
+                    <p>Официальная гарантия!</p>
+                </div>
+                <div class="block_gar">
+                    <div class="block_gar_item">
+                        <img src="./images/garant1_15.png">
+                        <p class="otzname_us">Заказывая оригинальные Фототюли «Sonate»
+                            <br> на нашем сайте, вы получаете официальную гарантию от производителя.</p>
+                    </div>
+                    <div class="block_gar_item block_gar_item_center">
+                        <img src="./images/garant3_15.png">
+                    </div>
+                    <div class="block_gar_item center">
+                        <img src="./images/garant2_15.png">
+                        <p class="otzname_us">Мы гарантируем, что продукт будет служить
+                            <br> более 10 лет, не теряя при этом яркости
+                            <br> и привлекательности.</p>
+                    </div>
+                </div>
+                <p class="posddell">Остерегайтесь подделок!</p>
+                <p class="s7t1">Сейчас появилось множество подделок из Китая. Такие подделки не только теряют цвет после стирки, но еще и вредны для здоровья, поскольку изготавливаются из дешевых токсичных материалов, которые не предназначены для использования внутри
+                    помещений.
+                </p>
+                <p class="s7t2">Настоящие французские Фототюли «Sonate»
+                    <br> только на нашем сайте!</p>
+                <p class="s7btn s7btn2">Заказать</p>
+            </div>
+        </div>
+    </section>
+    <section class="section_8" id="section_78">
+        <div class="block">
+            <div class="block_in">
+                <div class="h1">
+                    <p>Отзывы наших покупательниц</p>
+                </div>
+                <div class="block_otz">
+                    <div class="block_otz1">
+                        <div class="block_otztext">
+                            <p>Классная вещь. Качество отличное. И комната выглядит совсем по-другому, не так уныло и стерильно, как это бывает, когда повесишь обычную тюль и обычные Фототюли. Мне очень нравится.
+                            </p>
+                        </div>
+                        <p class="otzname">Елена Ивановна С., Москва</p>
+                    </div>
+                    <div class="block_otz1">
+                        <div class="block_otztext">
+                            <p>Решила попробовать и купила. Посылку получила, спасибо. Повесила Фототюли в гостиной. Она теперь выглядит ярко и красиво. Пришла подруга и решила, что я ремонт сделала!!! А я просто, считай, тюль заменила. Закажу еще для спальни!
+                            </p>
+                        </div>
+                        <p class="otzname">Тамара Петровна К., Екатеринбург</p>
+                    </div>
+                    <div class="block_otz1">
+                        <div class="block_otztext">
+                            <p>Заказала два комплекта тюль – для себя, и дочери в подарок. Уже получила. Качество превосходное, сразу видишь, что Франция, а не та ерунда, что на рынке продают за такие же деньги. Спасибо!
+                            </p>
+                        </div>
+                        <p class="otzname">Анастасия Федоровна Е., Санкт-Петербург</p>
+                    </div>
+                    <div class="block_otz1">
+                        <div class="block_otztext">
+                            <p>Купила Фототюли, для всех комнат. Это теперь украшение моей квартиры! Все подруги завидуют. Подтверждаю высокое качество товара.
+                            </p>
+                        </div>
+                        <p class="otzname">Лариса Сергеевна Б., Ростов</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section_9">
+        <div class="block">
+            <div class="block_in">
+                <div class="block9">
+                    <p class="b2text1">Суперакция!</p>
+                    <p class="vlist1">Распродажа коллекции!
+                        <br> Европейская новинка!</p>
+                    <p class="vlist2">Закажите «Sonate»
+                        <br> с максимальной скидкой
+                        <br> прямо сейчас!</p>
+                    <div class="priceBlock">
+                        <p class="oldprice"><strike>Цена: <price class="oldproductsum">
+                                    <x-oldprice>1980</x-oldprice>
+                                    <x-currency>грн</x-currency>
+                                </price></strike></p>
+                        <p class="price"><span class="pricetodaytext">Цена сегодня: </span><span class="pricetoday productsum">
+                                <x-newprice>990</x-newprice>
+                                <x-currency>грн</x-currency>
+                            </span></p>
+                    </div>
+                    <span style="font-size: 12px; opacity: 0.8; color: #222; display: block;margin: 10px 0;">* цена за 1 метр погонный</span>
+                    <p class="akckor">Осталось<span>4</span> штук!</p>
+                    <a class="zazabtn">Заказать!</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section_10">
+        <div class="block">
+            <div class="block_in">
+                <div class="block_f">
+                    <p class="logof"><img src="./images/logof_16.png"></p>
+                    <div class="navblockf">
+                        <ul>
+                            <li><a class="olia1" href="#">О продукции</a></li>
+                            <li><a class="olia2" href="#">Отзывы</a></li>
+                            <li><a class="olia3" href="#">Преимущества</a></li>
+                        </ul>
+                    </div>
+                    <p class="phonef">
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div style="clear: both;"></div>
+    <section style="background: url(images/fbg_06.png) no-repeat center 0;
+                padding: 0;
+                background-size: cover;">
+        <div class="foot_ru_center" style="text-align: center; margin: 0px auto; padding: 30px 0; font-size:15px">
+            <p>OOO ТРЕЙД КОМПАНИ ОГРН 1187746263891 ИНН 7716902002 <br> г. Москва, Киевское шоссе 22-й км, д. 4, стр. 5, оф. 04.</p>
+            <p class="conf-link doclinks">
+                <a class="nav-link" href="" onclick="window.open('pol.html'); return false;">Политика конфиденциальности </a>
+            </p>
+        </div>
+    </section>
+    <style>
+        .foot_ru_center a,
+        .foot_ru_center p{
+            color: #fff; line-height: 20px; margin-top: 10px;
+        }
+    </style>
+    <div class="allfon"></div>
+    <div class="popapvspl">
+        <div class="close"></div>
+        <div class="bottom_prosmotr">
+            <div class="popleft">
+                <img src="">
+            </div>
+            <div class="popright">
+                <p class="hpop">Комплект белья коллекции «Magnifico»</p>
+                <p class="oldprice">Обычная цена: <strike class="oldproductsum">
+                        <x-oldprice>1980</x-oldprice>
+                        <x-currency>грн</x-currency>
+                    </strike></p>
+                <p class="price"><span class="pricetodaytext">Цена сегодня:</span><span class="pricetoday productsum">
+                        <x-newprice>990</x-newprice>
+                        <x-currency>грн</x-currency>
+                    </span></p>
+                <span style="font-size: 12px; opacity: 0.8; color: #222; display: block;margin: 10px 0;">* цена за 1 метр погонный</span>
+                <div class="bzakaz">
+                    <form action="" method="post" id="popform" autocomplete="on">
+
+
+                        <select name="offer" class="form-control country_chang">
+                            <option data-country-code="RU" value="12000">
+                                Россия </option>
+                            <option data-country-code="UA" selected="selected" value="5569">
+                                Украина </option>
+                        </select>
+                        <input type="text" name="name" placeholder="Ваше имя" required="required" value="" autocomplete="name">
+                        <input type="tel" class="phone tel" name="phone" placeholder="+380" required="required" value="" autocomplete="tel">
+                        <input type="hidden" name="description" value="Покупатель не выбрал товар">
+                        <input type="hidden" name="address" value="Уточнить у покупателя">
+                        <div class="reolader">
+                            <input type="submit" class="btn popzakbtn mm_button" value="Быстрый заказ">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('.bzak').click(function() {
+                var par = $(this).parent();
+                var val_cart = par.find($('.nametovar')).text();
+                $('[name="description"]').val(val_cart);
+            });
+        });
+    </script>
+    <style type="text/css">
+    .form-control {
+        border: 1px solid #fff;
+        padding: 13px 10px 13px 15px;
+        width: 100%;
+        font-size: 17px;
+        margin-bottom: 7px;
+    }
+    </style>
+</body>
+
+</html>
