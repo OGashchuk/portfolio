@@ -1,0 +1,305 @@
+/* Code tidied up by ScrapBook */
+
+.m1-form input.field:focus::-moz-placeholder {
+    opacity: 0;
+}
+
+.m1-form input.field:focus:-moz-placeholder {
+    opacity: 0;
+}
+
+.m1-form input.field:-moz-placeholder {
+    color: rgb(34, 34, 34);
+    opacity: 1;
+}
+
+.m1-form input.field::-moz-placeholder {
+    color: rgb(34, 34, 34);
+    opacity: 1;
+}
+
+.clearfix::after,
+.topplus li::after,
+.container::after,
+.ship li::after,
+.rev::after,
+.rev-text .person::after,
+.possible li::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.ulfix {
+    font-size: 0px;
+}
+
+.ulfix li {
+    font-size: 15px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Montserrat", Helvetica, sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1.2em;
+}
+
+b,
+strong {
+    font-weight: 700;
+}
+
+body {
+    width: 100%;
+    min-width: 320px;
+    padding: 0px;
+    margin: 0px auto;
+    font-family: "Montserrat", Helvetica, sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.467em;
+    color: #222;
+    background: #fff;
+}
+
+section {
+    width: 100%;
+    max-width: 1920px;
+    margin: 0px auto;
+    padding: 40px 0px;
+}
+
+.wrap {
+    width: 960px;
+    padding: 0px 10px;
+    margin: 0px auto;
+    height: 100%;
+    position: relative;
+}
+
+.wrap::after {
+    clear: both;
+    content: "";
+    display: table;
+}
+
+.nopad {
+    padding: 0px;
+}
+
+.m1-form .field {
+    position: relative;
+    display: block;
+    outline: 0px none;
+    border: medium none;
+    border-radius: 3px;
+    width: 100%;
+    height: 55px;
+    line-height: 55px;
+    margin: 0px auto 15px;
+    padding: 0px 20px;
+    background: rgb(255, 255, 255) none repeat scroll 0% 0%;
+    text-align: center;
+    font-size: 16px;
+    font-family: "Montserrat", Helvetica, sans-serif;
+    font-weight: 400;
+    color: rgb(34, 34, 34);
+    transition: all 0.2s ease 0s;
+}
+
+.button-m {
+    position: relative;
+    display: block;
+    width: 300px;
+    height: 56px;
+    line-height: 56px;
+    margin: 0px auto;
+    border: medium none;
+    border-radius: 3px;
+    text-align: center;
+    font-family: "Montserrat", Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    color: rgb(34, 34, 34);
+    text-shadow: 0px 1px 0px rgb(255, 229, 139);
+    background: transparent linear-gradient(to bottom, rgb(253, 220, 64) 0%, rgb(255, 192, 0) 100%) repeat scroll 0% 0%;
+    box-shadow: 0px 2px 0px 0px rgb(215, 162, 0);
+    transition: all 0.2s ease 0s;
+    -moz-appearance: none;
+}
+
+.button-m:hover {
+    background: transparent linear-gradient(to bottom, rgb(253, 220, 55) 0%, rgb(248, 186, 0) 100%) repeat scroll 0% 0%;
+}
+
+.button-m:active {
+    top: -1px;
+}
+
+.m1-form {
+    width: 300px;
+    margin: 0px auto;
+}
+
+.m1-form .button-m {
+    width: 100%;
+}
+
+h2.title {
+    margin: 0px 0px 40px;
+    text-align: center;
+    font-size: 35px;
+}
+
+h2.title1 {
+    color: rgb(119, 195, 0);
+    margin: 0px 0px 40px;
+    text-align: center;
+    font-size: 29px;
+}
+
+h2.title1>span {
+    color: rgb(119, 195, 0);
+    font-size: 33px;
+}
+
+h2.title>span {
+    color: rgb(119, 195, 0);
+}
+
+.price {
+    width: 300px;
+    height: 78px;
+    border-radius: 3px;
+    background: rgb(119, 195, 0) url("../img/price.png") no-repeat scroll 0px center;
+    margin: 0px auto 20px;
+    text-align: center;
+    color: rgb(255, 255, 255);
+}
+
+.old-cost {
+    float: left;
+}
+
+.old-cost p {
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 28px;
+    text-decoration: line-through;
+    text-align: center;
+}
+
+.old-cost p span {
+    text-decoration: line-through;
+}
+
+.old-cost>span,
+.new-cost>span {
+    font-size: 15px;
+}
+
+.new-cost {
+    float: right;
+}
+
+.new-cost p {
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 28px;
+}
+
+.new-cost,
+.old-cost {
+    width: 50%;
+    height: 75px;
+    padding-top: 13px;
+}
+
+.slick-prev,
+.slick-next {
+    font-size: 0px;
+    line-height: 0;
+    position: absolute;
+    top: 110px;
+    display: block;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    padding: 0px;
+    cursor: pointer;
+    color: transparent;
+    border: medium none;
+    outline: medium none;
+    background: rgb(255, 204, 0) url("scrapbook:download:error:https://xn-----9kcdmed4bde0afeuh5ak5exd2b.xn--p1ai/arrow.png") no-repeat scroll center center;
+    z-index: 3;
+}
+
+.slick-prev {
+    left: -40px;
+}
+
+.slick-next {
+    right: -40px;
+    transform: rotate(180deg);
+}
+
+.slick-dotted.slick-slider {
+    margin-bottom: 30px;
+}
+
+.slick-dots {
+    position: absolute;
+    bottom: -25px;
+    display: block;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    list-style: outside none none;
+    text-align: center;
+}
+
+.slick-dots li {
+    margin: 0px 6px;
+    display: inline-block;
+}
+
+.slick-dots li button {
+    padding: 0px;
+    border: medium none;
+    font-size: 0px;
+    text-indent: -9000px;
+    width: 57px;
+    height: 10px;
+    border-radius: 5px;
+    background: rgb(244, 244, 248) none repeat scroll 0% 0%;
+    cursor: pointer;
+    box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.1) inset;
+}
+
+.slick-dots li.slick-active button {
+    background: rgb(119, 195, 0) none repeat scroll 0% 0%;
+}
+
+.slick-dots li button::before {
+    display: none;
+}
+
+@media screen and (max-width: 976px) {
+    .wrap {
+        width: 640px;
+    }
+}
+
+@media screen and (max-width: 659px) {
+    .wrap {
+        width: 320px;
+    }
+}
