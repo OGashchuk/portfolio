@@ -1301,7 +1301,7 @@ section {
 .bzakaz input {
     border: 1px solid #fff;
     padding: 13px 10px 13px 15px;
-    width: 94%;
+    width: 100%;
     font-size: 17px;
     margin-bottom: 7px;
 }
