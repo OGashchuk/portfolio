@@ -1,0 +1,510 @@
+/*block1*//* after_qbici */
+.block1 {
+    background: url("../img/b1.jpg") no-repeat center top;
+    height: 660px;
+    padding: 20px 0 0;
+}
+.block1 h2, .block8 h2 {
+    font-size: 24px;
+    color:#fff;
+    text-align: center;
+    letter-spacing: .24px;
+    font-weight: 600;
+}
+.block1 h1, .block8 h1 {
+    font-size: 60px;
+    color:#d2ff00;
+    text-align: center;
+    letter-spacing: 1.5px;
+}
+.block1 h1 span, .block8 h1 span  {
+    color:#054d9b;
+    background: #d2ff00;
+    display: inline-block;
+    border-radius: 5px;
+    line-height: 65px;
+    padding: 0 10px;
+}
+.block1 h3, .block8 h3  {
+    font-size: 24px;
+    color:#054d9b;
+    text-align: center;
+    text-transform: lowercase;
+    display: block;
+    width: 292px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 5px;
+    line-height: 32px;
+    font-weight: 600;
+    margin-bottom: 21px;
+}
+.sale {
+    width: 122px;
+    height: 122px;
+    border-radius: 100%;
+    background: #ffed1a;
+    text-align: center;
+    color:#404040;
+    font-size: 19px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.26px;
+    padding: 32px 0 0;
+    position: absolute;
+    top: 192px;
+    left: 481px;
+}
+.sale p {
+    font-size: 36px;
+    letter-spacing: 0;
+    line-height: 36px;
+}
+.plus {
+    margin-bottom: 15px
+}
+.plus li {
+    line-height: 42px;
+}
+.plus p {
+    font-size: 20px;
+    font-weight: 600;
+    color:#fff;
+    overflow: hidden;
+}
+.plus li:before {
+    content: '';
+    display: block;
+    background: url("../img/check2.png") no-repeat 0 0;
+    width: 23px;
+    height: 20px;
+    float: left;
+    margin: 9px 10px 0 0;
+}
+.block1 .button-m {
+    margin: 0 0 0 0;
+}
+/*block2*//* endzeit_____ */
+.preim {
+    text-align: center;
+}
+.preim li {
+    display: inline-block;
+    vertical-align: top;
+    width: 25%;
+}
+.preim img {
+}
+.preim p {
+    font-size: 16px;
+    padding: 0 20px;
+}
+/*block3*//* michael-k90 */
+.block3, .block6 {
+    background: #8ecffc;
+background: -moz-linear-gradient(45deg, #8ecffc 0%, #c0fda5 100%);
+background: -webkit-linear-gradient(45deg, #8ecffc 0%,#c0fda5 100%);
+background: linear-gradient(45deg, #8ecffc 0%,#c0fda5 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8ecffc', endColorstr='#c0fda5',GradientType=1 );
+}
+
+/*block4*//* bizlife_inc */
+.what {
+    
+}
+.what-left {
+    width: 460px;
+    float: left;
+}
+.what-right {
+    width: 460px;
+    float: right;
+}
+.what-right > p {
+    margin-bottom: 15px;
+}
+.gray-box {
+    background: #e8e8e8;
+    padding: 20px 20px 6px;
+    border-radius: 10px;
+}
+.gray-box h3 {
+    font-size: 16px;
+    margin-bottom: 14px;
+}
+.gray-box h3:before {
+    content: '';
+    display: block;
+    background: url("../img/check.png") no-repeat 0 0;
+    width: 30px;
+    height: 30px;
+    margin: -7px 10px 0 0;
+    float: left;
+}
+.gray-box ol {
+    list-style: decimal;
+    margin-left: 20px;
+}
+.gray-box li {
+    font-size: 16px;
+    margin-bottom: 13px;
+}
+.product {
+    
+}
+.product div {
+}
+.product img {
+    border:4px solid #e8e8e8;
+    border-radius: 10px;
+}
+/*block5*//* owmen17 */
+.block5 {
+    background: url("../img/patt.png") repeat;
+}
+.block5 h2 {
+    margin-bottom: 10px;
+}
+.block5 .wrap {
+    padding: 0;
+}
+.block5 .wrap > p {
+    text-align: center;
+    color:#898989;
+    margin-bottom: 30px;
+}
+.robots {
+    text-align: center;
+}
+.robots li {
+    display: inline-block;
+    vertical-align: top;
+    width: 120px;
+    margin: 0 8px;
+}
+.robots img {
+    display: block;
+    margin: 0 auto;
+}
+.robots p {
+    font-size: 16px;
+    line-height: 18px;
+    padding: 5px 0 40px;
+}
+/*block6*//* after_qbici */
+.block6 .wrap {
+    padding: 0;
+}
+.reviews {
+}
+.reviews .rev {
+    width: 300px;
+    min-height: 503px;
+    margin: 0 auto 10px;
+    background: #fff;
+    border-radius: 20px;
+    position: relative;
+    z-index: 1;
+    -webkit-box-shadow: 0 0 8px 0 rgba(0,0,0,.2);
+    box-shadow: 0 0 8px 0 rgba(0,0,0,.2);
+}
+.reviews:before {
+    top:20px;
+}
+.reviews:after {
+    bottom: 30px;
+}
+.reviews:before, .reviews:after {
+    content: '';
+    display: block;
+    background: url("../img/skrep.png") no-repeat 0 0; 
+    width: 376px;
+    height: 8px;
+    position: absolute;
+    right: 293px;
+    z-index: 3;
+}
+.rev img {
+    border-radius: 20px 20px 0 0;
+}
+.rev h3 {
+    font-size: 18px;
+    text-transform: none;
+    padding: 28px 0 0 20px;
+}
+.rev h3:before {
+    content: '';
+    display: block;
+    background: url("../img/ava1.jpg") no-repeat 0 0;
+    width: 42px;
+    height: 42px;
+    float: left;
+    margin: -13px 10px 0 0;
+}
+.r2 h3:before {
+    background-image: url("../img/ava2.jpg");
+}
+.r3 h3:before {
+    background-image: url("../img/ava3.jpg");
+}
+.rev p {
+    padding: 10px 20px 20px;
+    text-align: justify;
+    -moz-text-align-last: center;
+    text-align-last: center;
+}
+/*block7*//* endzeit_____ */
+.ship {
+    text-align: center;
+}
+.ship li {
+    display: inline-block;
+    vertical-align: top;
+    width: 25%;
+    position: relative;
+}
+.ship img {
+    display: block;
+    margin: 0 auto;
+    border-radius: 100%;
+    border:4px solid #008fff;
+}
+.ship p {
+    padding: 15px 18px 0;
+    font-size: 16px;
+}
+.ship li:after {
+    content: '';
+    display: block;
+    width: 6px;
+    height: 6px;
+    border:4px solid #d2ff00;
+    position: absolute;
+    top: 80px;
+    right: -5px;
+    border-radius: 100%;
+}
+.ship li:last-child:after {
+    display: none;
+}
+/*block8*//* michael-k90 */
+.block8 {
+    background: url("../img/bf.jpg") no-repeat center top;
+    height: 670px;
+    padding: 22px 0 0;
+} 
+.block8 .sale {
+    top: 211px;
+    left: 399px;
+}
+.formbox {
+    background: #ffffff;
+    width: 340px;
+    border-radius: 10px;
+    padding: 10px 0 20px;
+}
+.formbox .countbox {
+    margin: 0 auto;
+}
+.formbox .price {
+    margin: 15px auto;
+}
+.formbox .countbox:before, .formbox .price {
+    color:#404040;
+}
+.formbox .new-cost p {
+    color:#bbe500;
+}
+ 
+/*block9*//* bizlife_inc */
+
+
+/*block10*//* owmen17 */
+
+
+.footer {
+    text-align: center;
+    background: #000;
+    padding: 40px 0 30px;
+}
+.footer a {
+    font-size: 14px;
+    color:#333;
+}
+/*-------------------------------------- Media Queries ----959---------------------------------*//* after_qbici */    
+@media screen and (max-width: 976px) {
+    .block1 {
+        background: url("../img/b1m.jpg") no-repeat center top;
+        height: 660px;
+    }
+    .block1 h1, .block8 h1 {
+        font-size: 41px;
+        letter-spacing: 1.05px;
+        margin: 5px 0 17px;
+}
+    .sale {
+        top: 341px;
+        left: 505px;
+}
+    .block1 h1 span, .block8 h1 span {
+        line-height: 42px;
+        padding: 0 5px;
+}
+    h2.title {
+        font-size: 33px;
+}
+    .preim li {
+        width: 50%;
+    }
+    .preim p {
+        padding: 0 61px 30px;
+}
+    .block2 {
+        padding-bottom: 10px;
+    }
+    .video-container {
+        width: 620px;
+        height: 361px;
+        border: 14px solid #fff;
+}
+    .what-left {
+        float: none;
+        margin: 0 auto;
+}
+    .what-right {
+        width: 100%;
+        float: none;
+        padding-top: 30px;
+}
+    .robots li {
+        margin: 0 17px;
+}
+    .reviews:before, .reviews:after, .ship li:nth-child(2):after {
+        display: none;
+    }
+    .ship li {
+        width: 50%;
+    }
+    .ship p {
+        padding: 15px 54px 35px;
+    }
+    .block7 {
+        padding-bottom: 5px;
+    }
+    .block8 .sale {
+        top: 485px;
+        left: 488px;
+}
+    .block8 {
+        background-image: url("../img/bfm.jpg");
+        height: 670px;
+    }
+}
+/*-------------------------------------- Media Queries ----639---------------------------------*//* michael-k90 */ 
+@media screen and (max-width: 659px) {
+    .block1 {
+        background: url("../img/b1s.jpg") no-repeat center top;
+        height: 963px;
+    }
+    .block1 .button-m {
+        margin: 0 auto;
+    }
+    .block1 h2, .block8 h2 {
+        font-size: 14px;
+        letter-spacing: 0;
+}
+    .block1 h1, .block8 h1 {
+        font-size: 30px;
+        letter-spacing: 0.75px;
+        line-height: 33px;
+        margin: 5px 0 10px;
+}
+    .block1 h1 span, .block8 h1 span {
+        line-height: 36px;
+    }
+    .block1 h3, .block8 h3 {
+        font-size: 16px;
+        width: 210px;
+        line-height: 27px;
+}
+    .sale {
+        position: static;
+        margin: 24px 0 227px 10px;
+}
+    .plus p {
+        font-size: 16px;
+}
+    .plus li {
+        line-height: 32px;
+        margin-left: 7px;
+}
+    .plus li:before {
+        margin: 4px 10px 0 0;
+}
+    .block1 .wrap, .block8 .wrap {
+        padding: 0;
+    }
+    .block1 .countbox, .block1 .price {
+        margin: 20px auto;
+    }
+    h2.title {
+        font-size: 22px;
+}
+    h2.title span {
+        display: block;
+    }
+    .preim li {
+        width: 100%;
+    }
+    .preim p {
+        padding: 0 56px 30px;
+}
+    .block3 .wrap {
+        padding: 0;
+    }
+    .video-container {
+        width: 100%;
+        height: 180px;
+        border: none;
+        border-radius: 0;
+}
+    .what-left {
+        width: 100%;
+    }
+    .slick-dots li {
+        margin: 0 5px 0 0;
+}
+    .slick-dots li button {
+        width: 70px;
+        height: 51px;
+}
+    .block5 .wrap > p {
+        font-size: 15px;
+    }
+    .robots p {
+        padding: 5px 0 20px;
+}
+    .ship li {
+        width: 100%;
+}
+    .ship li:after {
+        display: none;
+    }
+    .block8 {
+        background: url("../img/bfs.jpg") no-repeat center top;
+        height: 1035px;
+    }
+    .formbox {
+        width: 320px;
+}
+    .block8 .sale {
+        margin: 24px 0 235px 184px;
+}
+}
+
+
+
+
+
+
+
