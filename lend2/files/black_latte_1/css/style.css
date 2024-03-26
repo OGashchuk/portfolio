@@ -1183,7 +1183,7 @@ h4 {
         font-size: 25px;
         line-height: 30px;
     }
-    input[type="text"],
+    input[type="text"],input[type="tel"],
     select {
         width: 100%;
         -webkit-box-sizing: border-box;
